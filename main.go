@@ -13,7 +13,6 @@ func main() {
 	// -----------------
 
 	if os.Args != nil && len(os.Args) > 1 {
-		fmt.Println("Hello World")
 		commitText := os.Args[1]
 		if commitText != "" {
 
