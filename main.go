@@ -13,8 +13,9 @@ func main() {
 	// -----------------
 
 	if os.Args != nil && len(os.Args) > 1 {
-		commitText := os.Args[1]
-		if commitText != "" {
+		changeType := os.Args[1]
+		commitText := os.Args[2]
+		if commitText != "" && changeType != "" {
 
 			// -------------------------------------------
 			// ------------  GET CURRENT BRANCH  ---------
@@ -42,9 +43,15 @@ func main() {
 			// -------------------------------------------
 			// ------------  COMMIT CMD MESSAGE + BRANCH
 			// -------------------------------------------
+			// Trimm branchname to 8, if needed
+			trimmedBranch := string(currentBranch[:len(currentBranch)-1])
+			if len(currentBranch) > 8 {
+				trimmedBranch = string(currentBranch[:8])
+			}
 
-			formatBranch := "#" + string(currentBranch)
-			runGitCommit := exec.Command("git", "commit", "-m "+string(commitText)+" "+formatBranch)
+			fullCommitText := changeType + ": [" + string(trimmedBranch) + "] " + string(commitText)
+			fmt.Println(fullCommitText)
+			runGitCommit := exec.Command("git", "commit", "-m "+fullCommitText)
 			_, err = runGitCommit.Output()
 
 			if err != nil {
@@ -53,7 +60,7 @@ func main() {
 			}
 
 			// Print the output
-			fmt.Println(string("✅: Excuted Git Command: git commit -m " + string(commitText) + " " + formatBranch))
+			fmt.Println(string("✅: Commited:" + string(fullCommitText)))
 			fmt.Println("☕️: Just push")
 
 			return
