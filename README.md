@@ -18,7 +18,9 @@ Curernt Git Branch is currently trimmed by 8 (which will be later defined by a c
 ```shell
 go build
 ./GoCommit
-or
+
+# or
+
 go run main.go
 ```
 
