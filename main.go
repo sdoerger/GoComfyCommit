@@ -49,7 +49,7 @@ func main() {
 				trimmedBranch = string(currentBranch[:8])
 			}
 
-			fullCommitText := "\"" + changeType + ": [" + string(trimmedBranch) + "] " + string(commitText) + "\""
+			fullCommitText := changeType + ": [" + string(trimmedBranch) + "] " + string(commitText)
 			fmt.Println(fullCommitText)
 			runGitCommit := exec.Command("git", "commit", "-m"+fullCommitText)
 			_, err = runGitCommit.Output()
