@@ -12,10 +12,8 @@ func main() {
 	// Command line Args
 	// -----------------
 
-	if os.Args != nil {
+	if os.Args != nil && len(os.Args) >= 1 {
 
-		fmt.Println("os.Args")
-		fmt.Println(len(os.Args))
 		fmt.Println(os.Args)
 
 		changeType := ""
@@ -65,7 +63,10 @@ func main() {
 			}
 
 			fullCommitText := ""
-			fmt.Println(len(os.Args))
+
+			if os.Args != nil && len(os.Args) == 1 {
+				fullCommitText = string(commitText)
+			}
 
 			if os.Args != nil && len(os.Args) == 2 {
 				fullCommitText = string(commitText)
@@ -75,10 +76,6 @@ func main() {
 				fullCommitText = changeType + ": [" + string(trimmedBranch) + "] " + string(commitText)
 			}
 
-			fmt.Println("fullCommitText")
-			fmt.Println(fullCommitText)
-
-			fmt.Println(fullCommitText)
 			runGitCommit := exec.Command("git", "commit", "-m"+fullCommitText)
 			_, err = runGitCommit.Output()
 
