@@ -4,7 +4,10 @@
 
 I need it this way.
 
-It basically runs git add . and git commit -m "<type = first cli arg><Curernt Git Branch><message = second cli arg>"
+It basically runs `git add . and git commit -m "<type = first cli arg><Curernt Git Branch><message = second cli arg>"`
+
+OR with one argument
+`git add . and git commit -m "<message = second cli arg>"`
 
 I. e.: `fix: [branchName] Remove JavaScript from Hero CTA`
 

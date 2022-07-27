@@ -12,7 +12,7 @@ func main() {
 	// Command line Args
 	// -----------------
 
-	if os.Args != nil && len(os.Args) > 1 {
+	if os.Args != nil {
 
 		fmt.Println("os.Args")
 		fmt.Println(len(os.Args))
