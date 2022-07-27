@@ -14,8 +14,6 @@ func main() {
 
 	if os.Args != nil && len(os.Args) >= 1 {
 
-		fmt.Println(os.Args)
-
 		changeType := ""
 		commitText := "Update"
 
