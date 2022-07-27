@@ -30,7 +30,7 @@ func main() {
 			commitText = os.Args[2]
 		}
 
-		if commitText != "" && changeType != "" {
+		if commitText != "" {
 
 			// -------------------------------------------
 			// ------------  GET CURRENT BRANCH  ---------
@@ -71,7 +71,7 @@ func main() {
 				fullCommitText = string(commitText)
 			}
 
-			if os.Args != nil && len(os.Args) == 3 {
+			if os.Args != nil && len(os.Args) == 3 && changeType != "" {
 				fullCommitText = changeType + ": [" + string(trimmedBranch) + "] " + string(commitText)
 			}
 
