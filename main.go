@@ -13,8 +13,23 @@ func main() {
 	// -----------------
 
 	if os.Args != nil && len(os.Args) > 1 {
-		changeType := os.Args[1]
-		commitText := os.Args[2]
+
+		fmt.Println("os.Args")
+		fmt.Println(len(os.Args))
+		fmt.Println(os.Args)
+
+		changeType := ""
+		commitText := "Update"
+
+		if len(os.Args) == 2 {
+			commitText = os.Args[1]
+			changeType = ""
+		}
+		if len(os.Args) == 3 {
+			changeType = os.Args[1]
+			commitText = os.Args[2]
+		}
+
 		if commitText != "" && changeType != "" {
 
 			// -------------------------------------------
@@ -49,7 +64,20 @@ func main() {
 				trimmedBranch = string(currentBranch[:8])
 			}
 
-			fullCommitText := changeType + ": [" + string(trimmedBranch) + "] " + string(commitText)
+			fullCommitText := ""
+			fmt.Println(len(os.Args))
+
+			if os.Args != nil && len(os.Args) == 2 {
+				fullCommitText = string(commitText)
+			}
+
+			if os.Args != nil && len(os.Args) == 3 {
+				fullCommitText = changeType + ": [" + string(trimmedBranch) + "] " + string(commitText)
+			}
+
+			fmt.Println("fullCommitText")
+			fmt.Println(fullCommitText)
+
 			fmt.Println(fullCommitText)
 			runGitCommit := exec.Command("git", "commit", "-m"+fullCommitText)
 			_, err = runGitCommit.Output()
