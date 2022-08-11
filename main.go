@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os/exec"
+	"strconv"
 
 	helpers "GoCommit/helpers"
 )
@@ -75,12 +76,21 @@ func main() {
 	// -------------------------------------------
 	// ------------  COMMIT CMD MESSAGE + BRANCH
 	// -------------------------------------------
-	// Trimm branchname to 8, if needed
-	trimmedBranch := string(currentBranch[:len(currentBranch)-1])
-	if len(currentBranch) > 8 {
-		trimmedBranch = string(currentBranch[:8])
+	// Trimm branchname if set
+
+	// string to int
+	toCrop, err := strconv.Atoi(*crop)
+	if err != nil {
+		// ... handle error
+		panic(err)
 	}
-	fmt.Println("RUNS")
+
+	fmt.Println(toCrop)
+
+	trimmedBranch := string(currentBranch[:len(currentBranch)-1])
+	if len(currentBranch) > toCrop {
+		trimmedBranch = string(currentBranch[:toCrop])
+	}
 
 	fullCommitText := ""
 
