@@ -21,6 +21,9 @@ func main() {
 		flag.Parse()
 		fmt.Print("*a")
 		fmt.Print(*a)
+		fmt.Print("/n")
+		fmt.Print("/n")
+		fmt.Print("/n")
 
 		changeType := ""
 		commitText := "Update"
