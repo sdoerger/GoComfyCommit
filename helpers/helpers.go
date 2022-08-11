@@ -26,12 +26,9 @@ type tCredentials struct {
 // User struct which contains a name
 // a type and a list of social links
 type tSetup struct {
-	Credentials tCredentials `json:"credentials"`
-	TargetUrl   string       `json:"targetUrl"`
-	LoginUrl    string       `json:"loginUrl"`
-	SubTargets  []string     `json:"subTargets"`
-	DownloadDir string       `json:"downloadDir"`
-	Content     string       `json:"content"`
+	Profiles    []string `json:"profiles"`
+	DownloadDir string   `json:"downloadDir"`
+	Content     string   `json:"content"`
 }
 
 func OpenFileRead(path string) ([]byte, error) {

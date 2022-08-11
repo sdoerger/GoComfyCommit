@@ -36,7 +36,7 @@ func main() {
 
 		// // Get setup json with credentials
 		setupGoPW := helpers.SetupJson("./config.json")
-		fmt.Println(setupGoPW)
+		fmt.Println(setupGoPW.Profiles)
 		// ################################################
 		// ################################################
 
