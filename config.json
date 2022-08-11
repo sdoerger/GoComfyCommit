@@ -2,7 +2,15 @@
   "profiles": [
     {
       "commitMessage": "${arg1}: [${branch}] ${arg2}",
-      "args": 2
+      "args": 2,
+      "truncBranchAt": 6,
+      "alias": "land"
+    },
+    {
+      "commitMessage": "${arg1}/${branch}: ${arg2}",
+      "args": 1,
+      "truncBranchAt": 8,
+      "alias": "exp"
     }
   ]
 }

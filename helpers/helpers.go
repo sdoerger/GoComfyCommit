@@ -28,6 +28,8 @@ type tCredentials struct {
 type tProfile struct {
 	CommitMessage string `json:"commitMessage"`
 	Args          int    `json:"args"`
+	TruncBranchAt int    `json:"truncBranchAt"`
+	Alias         string `json:"alias"`
 }
 type tSetup struct {
 	Profiles []tProfile `json:"profiles"`
