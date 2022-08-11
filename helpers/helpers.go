@@ -62,6 +62,11 @@ func SetupJson(setupPath string) (tSetup, error) {
 
 }
 
+func FindProfile(profiles []string, profile string) /*(string, error)*/ {
+	fmt.Println(profiles)
+	fmt.Println(profile)
+}
+
 func ParseMessagePattern(patternString string) {
 	fmt.Println(patternString)
 }

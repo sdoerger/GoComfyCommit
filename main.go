@@ -39,6 +39,16 @@ func main() {
 		if err == nil {
 			fmt.Println(setupProfiles.Profiles)
 
+			// profile, err := helpers.FindProfile(setupProfiles.Profiles, *alias)
+			// if err == nil {
+			// 	fmt.Println(profile)
+			// }
+			// fmt.Println(helpers.FindProfile(setupProfiles.Profiles, *alias))
+
+			// TODO
+			// Set crop length (if not flag on crop is set)
+			// *crop =
+
 		}
 
 	}
@@ -76,7 +86,7 @@ func main() {
 	// -------------------------------------------
 	// ------------  COMMIT CMD MESSAGE + BRANCH
 	// -------------------------------------------
-	// Trimm branchname if set
+	// Crop branchname if set by flag or config
 
 	// string to int
 	toCrop, err := strconv.Atoi(*crop)
@@ -84,8 +94,6 @@ func main() {
 		// ... handle error
 		panic(err)
 	}
-
-	fmt.Println(toCrop)
 
 	trimmedBranch := string(currentBranch[:len(currentBranch)-1])
 	if len(currentBranch) > toCrop {
