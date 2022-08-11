@@ -2,7 +2,7 @@
   "profiles": [
     {
       "commitMessage": "${arg1}: [${branch}] ${arg2}",
-      "args": "2"
+      "args": 2
     }
   ]
 }
