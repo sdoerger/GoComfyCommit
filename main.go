@@ -17,14 +17,14 @@ func main() {
 
 	if os.Args != nil && len(os.Args) >= 1 {
 
-		a := flag.String("alias", "", "Should there be alias")
+		alias := flag.String("a", "default", "username")
+		trunc := flag.String("t", "", "password")
 		flag.Parse()
-		fmt.Print("*a")
-		fmt.Print(*a)
-		fmt.Print("\n")
-		fmt.Print(len(*a))
-		fmt.Print("\n")
-		fmt.Print("\n")
+		fmt.Println("Username : ", *alias)
+		fmt.Println("Password : ", *trunc)
+
+		fmt.Println("\n")
+		fmt.Println(os.Args)
 
 		changeType := ""
 		commitText := "Update"
