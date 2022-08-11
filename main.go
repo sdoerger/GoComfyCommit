@@ -18,10 +18,21 @@ func main() {
 
 		changeType := ""
 		commitText := "Update"
+		setupPath := "./config.json"
 
-		// // Get setup json
-		setupGoPW := helpers.SetupJson("./config.json")
-		fmt.Println(setupGoPW.Profiles)
+		// Check if there is a config.json file
+		_, noFile := helpers.OpenFileRead(setupPath)
+		if noFile == nil {
+
+			// // Get setup json
+			setupProfiles, err := helpers.SetupJson(setupPath)
+
+			if err == nil {
+				fmt.Println(setupProfiles.Profiles)
+
+			}
+
+		}
 
 		if len(os.Args) == 2 {
 			commitText = os.Args[1]

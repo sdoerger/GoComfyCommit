@@ -2,7 +2,6 @@ package pwhelper
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -38,20 +37,18 @@ type tSetup struct {
 func OpenFileRead(path string) ([]byte, error) {
 	importFile, err := os.Open(path)
 	if err != nil {
-		log.Fatalf("Error opening setup file: %v", err)
+		// log.Fatalf("Error opening setup file: %v", err)
 	}
 
 	byteValue, err := ioutil.ReadAll(importFile)
 	if err != nil {
-		log.Fatalf("Error at reading setup file: %v", err)
+		// log.Fatalf("Error at reading setup file: %v", err)
 	}
 
 	return byteValue, err
 }
 
-func SetupJson(setupPath string) tSetup {
-
-	fmt.Println("JSON RUNS")
+func SetupJson(setupPath string) (tSetup, error) {
 
 	file, err := OpenFileRead(setupPath)
 	if err != nil {
@@ -61,7 +58,7 @@ func SetupJson(setupPath string) tSetup {
 	var setup tSetup
 	json.Unmarshal(file, &setup)
 
-	return setup
+	return setup, err
 
 }
 
