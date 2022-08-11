@@ -2,6 +2,7 @@ package pwhelper
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -26,7 +27,6 @@ type tCredentials struct {
 // a type and a list of social links
 type tProfile struct {
 	CommitMessage string `json:"commitMessage"`
-	Args          int    `json:"args"`
 	TruncBranchAt int    `json:"truncBranchAt"`
 	Alias         string `json:"alias"`
 }
@@ -62,14 +62,18 @@ func SetupJson(setupPath string) (tSetup, error) {
 
 }
 
-func RemoveDuplicateStr(strSlice []string) []string {
-	allKeys := make(map[string]bool)
-	list := []string{}
-	for _, item := range strSlice {
-		if _, value := allKeys[item]; !value {
-			allKeys[item] = true
-			list = append(list, item)
-		}
-	}
-	return list
+func ParseMessagePattern(patternString string) {
+	fmt.Println(patternString)
 }
+
+// func RemoveDuplicateStr(strSlice []string) []string {
+// 	allKeys := make(map[string]bool)
+// 	list := []string{}
+// 	for _, item := range strSlice {
+// 		if _, value := allKeys[item]; !value {
+// 			allKeys[item] = true
+// 			list = append(list, item)
+// 		}
+// 	}
+// 	return list
+// }

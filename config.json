@@ -1,14 +1,12 @@
 {
   "profiles": [
     {
-      "commitMessage": "${arg1}: [${branch}] ${arg2}",
-      "args": 2,
+      "commitMessage": "${t}: [${b}] ${m}",
       "truncBranchAt": 6,
       "alias": "land"
     },
     {
-      "commitMessage": "${arg1}/${branch}: ${arg2}",
-      "args": 1,
+      "commitMessage": "My CommitType: ${t} at Branch: ${b}: My Message: ${m}",
       "truncBranchAt": 8,
       "alias": "exp"
     }
