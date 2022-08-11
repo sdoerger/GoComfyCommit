@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"os/exec"
@@ -16,6 +17,11 @@ func main() {
 
 	if os.Args != nil && len(os.Args) >= 1 {
 
+		a := flag.String("alias", "", "Should there be alias")
+		flag.Parse()
+		fmt.Print("*a")
+		fmt.Print(*a)
+
 		changeType := ""
 		commitText := "Update"
 		setupPath := "./config.json"
@@ -27,6 +33,7 @@ func main() {
 			// // Get setup json
 			setupProfiles, err := helpers.SetupJson(setupPath)
 
+			// TODO: DO STUFF with config
 			if err == nil {
 				fmt.Println(setupProfiles.Profiles)
 
