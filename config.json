@@ -4,12 +4,5 @@
       "commitMessage": "${arg1}: [${branch}] ${arg2}",
       "args": 2
     }
-  ],
-  "credentials": {
-    "user": "k_Thompson",
-    "password": "12345"
-  },
-  "targetUrl": "hoergeraet-koethen.de",
-  "loginUrl": "https://cpd.winlocal.de",
-  "DownloadDir": "/home/stefan/Downloads/"
+  ]
 }
