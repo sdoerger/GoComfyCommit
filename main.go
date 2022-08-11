@@ -19,26 +19,9 @@ func main() {
 		changeType := ""
 		commitText := "Update"
 
-		// helpers "github.com/sdoerger/GoCommit/helpers"
-		// ################################################
-		// ################################################
-		// // TODO: RM hard coded if statement
-		// var setupPath string
-		// // -------------------------------------------
-		// // ------------  Get setup file by cmd line --
-		// // -------------------------------------------
-		// if os.Args == nil || len(os.Args) <= 1 || os.Args[1] == "" {
-		// 	fmt.Println("Setup file is missing")
-		// 	return
-		// } else {
-		// 	setupPath = os.Args[1]
-		// }
-
-		// // Get setup json with credentials
+		// // Get setup json
 		setupGoPW := helpers.SetupJson("./config.json")
 		fmt.Println(setupGoPW.Profiles)
-		// ################################################
-		// ################################################
 
 		if len(os.Args) == 2 {
 			commitText = os.Args[1]
