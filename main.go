@@ -37,7 +37,7 @@ func main() {
 
 		// TODO: DO STUFF with config
 		if err == nil {
-			fmt.Println(setupProfiles.Profiles)
+			fmt.Println(setupProfiles)
 
 			// profile, err := helpers.FindProfile(setupProfiles.Profiles, *alias)
 			// if err == nil {
