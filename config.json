@@ -1,0 +1,13 @@
+{
+  "credentials": {
+    "user": "k_Thompson",
+    "password": "12345"
+  },
+  "targetUrl": "hoergeraet-koethen.de",
+  "loginUrl": "https://cpd.winlocal.de",
+  "subTargets": [
+    "contactpage/preview/hoergeraet-koethen.de/index",
+    "contactpage/preview/hoergeraet-koethen.de/hoerakustik"
+  ],
+  "DownloadDir": "/home/stefan/Downloads/"
+}
