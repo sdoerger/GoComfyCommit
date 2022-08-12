@@ -22,9 +22,9 @@ func AssertErrorToNilf(message string, err error) {
 // User struct which contains a name
 // a type and a list of social links
 type TProfile struct {
-	CommitMessage string `json:"commitMessage"`
-	CropBranchAt  int    `json:"cropBranchAt"`
-	Alias         string `json:"alias"`
+	CommitMessage    string `json:"commitMessage"`
+	CropBranchFromTo int    `json:"cropBranchFromTo"`
+	Alias            string `json:"alias"`
 }
 type TSetup struct {
 	Profiles []TProfile `json:"profiles"`

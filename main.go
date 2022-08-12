@@ -57,8 +57,8 @@ func main() {
 			}
 
 			// If profiles has crop item and no crop is set (default: 0), assign it from profile
-			if profile.CropBranchAt > 0 && cropToStr > 0 {
-				*crop = strconv.Itoa(profile.CropBranchAt)
+			if profile.CropBranchFromTo > 0 && cropToStr > 0 {
+				*crop = strconv.Itoa(profile.CropBranchFromTo)
 			}
 
 			setFullCommitTest := helpers.SetFullCommitTest()
