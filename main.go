@@ -155,6 +155,8 @@ func main() {
 		fullCommitText = *changeType + ": [" + string(trimmedBranch) + "] " + string(*commitText)
 	}
 
+	fullCommitText = string(*commitText)
+
 	// RM duplicate spaces
 	space := regexp.MustCompile(`\s+`)
 	fullCommitText = space.ReplaceAllString(fullCommitText, " ")
