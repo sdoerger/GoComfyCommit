@@ -22,27 +22,12 @@ func main() {
 	crop := flag.String("c", "[0,0]", "crop")
 	flag.Parse()
 
-	// var cropRange []int
-
-	// cropToString := []byte(*crop)
-	// cropRange := cropToString[1]
-
 	// Convert crop string form flag to slice
 	var cropRange []int
 	if err := json.Unmarshal([]byte(*crop), &cropRange); err != nil {
 		panic(err)
 	}
 	var commitMsgPattern string
-
-	// TODO: RM
-	// fmt.Println("cropRange")
-	// fmt.Println(cropRange)
-
-	// fmt.Println("Alias : ", *alias)
-	// fmt.Println("crop : ", *crop)
-	// fmt.Println("*commitText : ", *commitText)
-	// fmt.Println("*changeType : ", *changeType)
-	// fmt.Println("\n")
 
 	setupPath := "./config.json"
 
