@@ -19,7 +19,7 @@ func main() {
 	commitText := flag.String("m", "Update", "commit message")
 	changeType := flag.String("t", "", "*changeType")
 	alias := flag.String("p", "", "alias")
-	crop := flag.String("c", "[0,100]", "crop")
+	crop := flag.String("c", "[0,0]", "crop")
 	flag.Parse()
 
 	// Convert crop string form flag to slice
@@ -28,6 +28,16 @@ func main() {
 		panic(err)
 	}
 	var commitMsgPattern string
+
+	// TODO: RM
+	// fmt.Println("cropRange")
+	// fmt.Println(cropRange)
+
+	// fmt.Println("Alias : ", *alias)
+	// fmt.Println("crop : ", *crop)
+	// fmt.Println("*commitText : ", *commitText)
+	// fmt.Println("*changeType : ", *changeType)
+	// fmt.Println("\n")
 
 	setupPath := "./config.json"
 
@@ -77,7 +87,7 @@ func main() {
 			}
 
 			// ##########################################
-			// SET DEFAULT CHANGE TYPE #################
+			// SET DEFAULT CHANGE TYPE ##################
 			// ##########################################
 			if len(profile.DefaultCommitType) > 0 && len(*changeType) <= 0 {
 				*changeType = profile.DefaultCommitType
