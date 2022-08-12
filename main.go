@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os/exec"
+	"regexp"
 
 	helpers "GoCommit/helpers"
 )
@@ -134,17 +135,27 @@ func main() {
 		trimmedBranch = string(currentBranch[cropRange[0]:cropRange[1]])
 	}
 
+	fullCommitText := ""
+
+	// SET PATTERN TO COMMIT TEXT (IF SETUP)
 	if len(commitMsgPattern) > 0 {
-		CommitMessageByPattern := helpers.CommitMessageByPattern(commitMsgPattern, *changeType, trimmedBranch, string(*commitText))
-		fmt.Println(CommitMessageByPattern)
+		fullCommitText = helpers.CommitMessageByPattern(commitMsgPattern, *changeType, trimmedBranch, string(*commitText))
 	}
 
 	/* TODO: RM */
-	return
+	// return
 
-	fullCommitText := ""
+	// DEFAULT IF NO TYPE
+	if len(*changeType) <= 0 {
+		fullCommitText = "[" + string(trimmedBranch) + "] " + string(*commitText)
+	}
 
+	// DEFAULT
 	fullCommitText = *changeType + ": [" + string(trimmedBranch) + "] " + string(*commitText)
+
+	// RM duplicate spaces
+	space := regexp.MustCompile(`\s+`)
+	fullCommitText = space.ReplaceAllString(fullCommitText, " ")
 
 	runGitCommit := exec.Command("git", "commit", "-m"+fullCommitText)
 	_, err = runGitCommit.Output()
