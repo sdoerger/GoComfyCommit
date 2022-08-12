@@ -19,7 +19,7 @@ func main() {
 	commitText := flag.String("m", "Update", "commit message")
 	changeType := flag.String("t", "", "*changeType")
 	alias := flag.String("p", "", "alias")
-	crop := flag.String("c", "[0,99]", "crop")
+	crop := flag.String("c", "[0,100]", "crop")
 	flag.Parse()
 
 	// Convert crop string form flag to slice
