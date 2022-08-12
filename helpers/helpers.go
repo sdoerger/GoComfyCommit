@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"regexp"
 )
 
 func AssertErrorToNilf(message string, err error) {
@@ -22,9 +23,10 @@ func AssertErrorToNilf(message string, err error) {
 // User struct which contains a name
 // a type and a list of social links
 type TProfile struct {
-	CommitMessage    string `json:"commitMessage"`
-	CropBranchFromTo []int  `json:"cropBranchFromTo"`
-	Alias            string `json:"alias"`
+	Alias             string `json:"alias"`
+	CommitMessage     string `json:"commitMessage"`
+	CropBranchFromTo  []int  `json:"cropBranchFromTo"`
+	DefaultCommitType string `json:"defaultCommitType"`
 }
 type TSetup struct {
 	Profiles []TProfile `json:"profiles"`
@@ -80,9 +82,17 @@ func ParseMessagePattern(patternString string) {
 	fmt.Println(patternString)
 }
 
-func SetFullCommitTest() string {
-	// fmt.Println("Hello")
-	return "Hello"
+func CommitMessageByPattern(cmtMsgPattern string, changeType string, branch string, message string) string {
+
+	t := regexp.MustCompile("\\${t}")
+	b := regexp.MustCompile("\\${b}")
+	m := regexp.MustCompile("\\${m}")
+
+	commitMsg := t.ReplaceAllString(cmtMsgPattern, changeType)
+	commitMsg = b.ReplaceAllString(commitMsg, branch)
+	commitMsg = m.ReplaceAllString(commitMsg, message)
+
+	return commitMsg
 }
 
 // func RemoveDuplicateStr(strSlice []string) []string {

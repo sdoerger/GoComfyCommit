@@ -1,14 +1,16 @@
 {
   "profiles": [
     {
+      "alias": "land",
       "commitMessage": "${t}: [${b}] ${m}",
       "cropBranchFromTo": [0, 8],
-      "alias": "land"
+      "defaultCommitType": "fix"
     },
     {
-      "commitMessage": "My CommitType: ${t} at Branch: ${b}: My Message: ${m}",
+      "alias": "exp",
+      "commitMessage": "My CommitType: ${t} at Branch: ${b} > My Message: ${m}",
       "cropBranchFromTo": [0, 6],
-      "alias": "exp"
+      "defaultCommitType": "feat"
     }
   ]
 }

@@ -16,7 +16,7 @@ func main() {
 	// -----------------
 
 	commitText := flag.String("m", "Update", "commit message")
-	changeType := flag.String("t", "Update", "*changeType")
+	changeType := flag.String("t", "", "*changeType")
 	alias := flag.String("p", "default", "alias")
 	crop := flag.String("c", "[0,0]", "crop")
 	flag.Parse()
@@ -31,15 +31,17 @@ func main() {
 	if err := json.Unmarshal([]byte(*crop), &cropRange); err != nil {
 		panic(err)
 	}
+	var commitMsgPattern string
 
-	fmt.Println("cropRange")
-	fmt.Println(cropRange)
+	// TODO: RM
+	// fmt.Println("cropRange")
+	// fmt.Println(cropRange)
 
-	fmt.Println("Alias : ", *alias)
-	fmt.Println("crop : ", *crop)
-	fmt.Println("*commitText : ", *commitText)
-	fmt.Println("*changeType : ", *changeType)
-	fmt.Println("\n")
+	// fmt.Println("Alias : ", *alias)
+	// fmt.Println("crop : ", *crop)
+	// fmt.Println("*commitText : ", *commitText)
+	// fmt.Println("*changeType : ", *changeType)
+	// fmt.Println("\n")
 
 	setupPath := "./config.json"
 
@@ -63,7 +65,6 @@ func main() {
 				fmt.Println(err.Error())
 				return
 			}
-			fmt.Println(profile)
 
 			// #######################
 			// ADD CROP RANGE ########
@@ -80,25 +81,20 @@ func main() {
 			}
 
 			// ##########################################
-			// SET COMMIT MESSAGE BY PATTERN ############
+			// SET COMMIT MESSAGE PATTERN ############
 			// ##########################################
-
-			// IF profiles has crop item and no crop is set (default: 0), assign it from profile
 			if len(profile.CommitMessage) > 0 {
-				fmt.Println(profile.CommitMessage)
-				// var convertProfileCrop []int
-				// if err := json.Unmarshal([]byte(*crop), &convertProfileCrop); err != nil {
-				// 	panic(err)
-				// }
+				commitMsgPattern = profile.CommitMessage
 			}
 
-			setFullCommitTest := helpers.SetFullCommitTest()
-			fmt.Println(setFullCommitTest)
+			// ##########################################
+			// SET DEFAULT CHANGE TYPE ##################
+			// ##########################################
+			if len(profile.DefaultCommitType) > 0 && len(*changeType) <= 0 {
+				*changeType = profile.DefaultCommitType
+			}
 		}
 	}
-
-	/* TODO: RM */
-	return
 
 	if len(*commitText) == 0 {
 		fmt.Println("No Commit Message")
@@ -137,6 +133,14 @@ func main() {
 	if len(currentBranch) > cropRange[1] {
 		trimmedBranch = string(currentBranch[cropRange[0]:cropRange[1]])
 	}
+
+	if len(commitMsgPattern) > 0 {
+		CommitMessageByPattern := helpers.CommitMessageByPattern(commitMsgPattern, *changeType, trimmedBranch, string(*commitText))
+		fmt.Println(CommitMessageByPattern)
+	}
+
+	/* TODO: RM */
+	return
 
 	fullCommitText := ""
 
