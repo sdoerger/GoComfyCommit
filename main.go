@@ -133,6 +133,7 @@ func main() {
 
 	if len(*changeType) >= 0 {
 		fmt.Println("RUNS 2")
+		fmt.Println(cropRange)
 		fullCommitText = "[" + string(trimmedBranch) + "] " + string(*commitText)
 	} else {
 		fmt.Println("RUNS 3")
