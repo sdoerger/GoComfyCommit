@@ -130,7 +130,7 @@ func main() {
 		fullCommitText = helpers.CommitMessageByPattern(commitMsgPattern, *changeType, trimmedBranch, string(*commitText))
 	} else {
 		// DEFAULT IF NO TYPE
-		if len(*changeType) <= 0 {
+		if len(*changeType) >= 0 {
 			fullCommitText = "[" + string(trimmedBranch) + "] " + string(*commitText)
 		}
 
