@@ -64,7 +64,7 @@ func main() {
 			profile, err := helpers.FindProfile(setupProfiles.Profiles, *alias)
 			if err != nil {
 				fmt.Println(err.Error())
-				return
+				// return
 			}
 
 			// #######################
