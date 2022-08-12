@@ -80,7 +80,7 @@ func main() {
 			}
 
 			// ##########################################
-			// SET COMMIT MESSAGE PATTERN ############
+			// SET COMMIT MESSAGE PATTERN ##############
 			// ##########################################
 			if len(profile.CommitMessage) > 0 {
 				commitMsgPattern = profile.CommitMessage
