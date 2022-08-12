@@ -65,6 +65,10 @@ func main() {
 			}
 			fmt.Println(profile)
 
+			// #######################
+			// ADD CROP RANGE ########
+			// #######################
+
 			// IF profiles has crop item and no crop is set (default: 0), assign it from profile
 			if len(profile.CropBranchFromTo) == 2 && *crop == "[0,0]" {
 				// Convert crop string form flag to slice
@@ -73,6 +77,19 @@ func main() {
 					panic(err)
 				}
 				cropRange = profile.CropBranchFromTo
+			}
+
+			// ##########################################
+			// SET COMMIT MESSAGE BY PATTERN ############
+			// ##########################################
+
+			// IF profiles has crop item and no crop is set (default: 0), assign it from profile
+			if len(profile.CommitMessage) > 0 {
+				fmt.Println(profile.CommitMessage)
+				// var convertProfileCrop []int
+				// if err := json.Unmarshal([]byte(*crop), &convertProfileCrop); err != nil {
+				// 	panic(err)
+				// }
 			}
 
 			setFullCommitTest := helpers.SetFullCommitTest()
