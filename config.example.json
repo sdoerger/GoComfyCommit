@@ -8,9 +8,9 @@
     },
     {
       "alias": "exp",
-      "commitMessage": "${t}: [${b}] ${m}",
-      "cropBranchFromTo": [0, 6],
-      "defaultCommitType": "refactor"
+      "commitMessage": "My CommitType: ${t} at Branch: ${b} > My Message: ${m}",
+      "cropBranchFromTo": [0, 3],
+      "defaultCommitType": "feat"
     }
   ]
 }
