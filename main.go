@@ -77,7 +77,7 @@ func main() {
 			}
 
 			// ##########################################
-			// SET DEFAULT CHANGE TYPE ##################
+			// SET DEFAULT CHANGE TYPE #################
 			// ##########################################
 			if len(profile.DefaultCommitType) > 0 && len(*changeType) <= 0 {
 				*changeType = profile.DefaultCommitType
