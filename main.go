@@ -145,9 +145,7 @@ func main() {
 		} else {
 			// DEFAULT
 			fullCommitText = string(*commitText)
-
 		}
-
 	}
 
 	// RM duplicate spaces
