@@ -138,15 +138,12 @@ func main() {
 	fullCommitText := ""
 
 	// SET PATTERN TO COMMIT TEXT (IF SETUP)
-	if len(commitMsgPattern) > 0 {
+	if hasNoConfig != nil && len(commitMsgPattern) > 0 {
 		fullCommitText = helpers.CommitMessageByPattern(commitMsgPattern, *changeType, trimmedBranch, string(*commitText))
 	}
 
-	/* TODO: RM */
-	// return
-
 	// DEFAULT IF NO TYPE
-	if len(*changeType) <= 0 {
+	if hasNoConfig != nil && len(*changeType) <= 0 {
 		fullCommitText = "[" + string(trimmedBranch) + "] " + string(*commitText)
 	}
 
