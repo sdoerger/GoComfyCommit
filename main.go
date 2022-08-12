@@ -12,9 +12,9 @@ import (
 
 func main() {
 
-	// -----------------
-	// FLAGS
-	// -----------------
+	// ############################
+	// FLAGS ######################
+	// ############################
 
 	commitText := flag.String("m", "Update", "commit message")
 	changeType := flag.String("t", "", "*changeType")
@@ -28,16 +28,6 @@ func main() {
 		panic(err)
 	}
 	var commitMsgPattern string
-
-	// TODO: RM
-	// fmt.Println("cropRange")
-	// fmt.Println(cropRange)
-
-	// fmt.Println("Alias : ", *alias)
-	// fmt.Println("crop : ", *crop)
-	// fmt.Println("*commitText : ", *commitText)
-	// fmt.Println("*changeType : ", *changeType)
-	// fmt.Println("\n")
 
 	setupPath := "./config.json"
 
@@ -126,8 +116,8 @@ func main() {
 	// -------------------------------------------
 	// ------------  COMMIT CMD MESSAGE + BRANCH
 	// -------------------------------------------
-	// Crop branchname if set by flag or config
 
+	// Crop branchname if set by flag or config
 	trimmedBranch := string(currentBranch[:len(currentBranch)-1])
 	if len(currentBranch) > cropRange[1] {
 		trimmedBranch = string(currentBranch[cropRange[0]:cropRange[1]])
