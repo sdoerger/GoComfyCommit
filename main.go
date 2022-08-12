@@ -57,7 +57,7 @@ func main() {
 			}
 
 			// If profiles has crop item and no crop is set (default: 0), assign it from profile
-			if profile.CropBranchFromTo > 0 && cropToStr != 0 {
+			if profile.CropBranchFromTo > 0 && cropToStr <= 0 {
 				fmt.Println("RUNS")
 				*crop = strconv.Itoa(profile.CropBranchFromTo)
 			}
@@ -80,7 +80,8 @@ func main() {
 
 	fmt.Println("CROP")
 	fmt.Println(*crop)
-	// return
+	/* TODO: RM */
+	return
 
 	if len(*commitText) == 0 {
 		fmt.Println("No Commit Message")
