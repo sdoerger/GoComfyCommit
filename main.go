@@ -18,7 +18,7 @@ func main() {
 
 	commitText := flag.String("m", "Update", "commit message")
 	changeType := flag.String("t", "", "*changeType")
-	alias := flag.String("p", "default", "alias")
+	alias := flag.String("p", "", "alias")
 	crop := flag.String("c", "[0,0]", "crop")
 	flag.Parse()
 
@@ -52,10 +52,8 @@ func main() {
 
 	// Check if there is a config.json file
 	_, hasNoConfig := helpers.OpenFileRead(setupPath)
-	if hasNoConfig == nil {
-		if len(*alias) <= 0 {
-			return
-		}
+	if hasNoConfig == nil && len(*alias) > 0 {
+
 		// // Get setup json
 		setupProfiles, err := helpers.SetupJson(setupPath)
 
