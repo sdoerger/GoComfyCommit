@@ -138,7 +138,7 @@ func main() {
 	fullCommitText := ""
 
 	// SET PATTERN TO COMMIT TEXT (IF SETUP)
-	if len(commitMsgPattern) > 0 {
+	if hasNoConfig == nil && len(commitMsgPattern) > 0 {
 		fullCommitText = helpers.CommitMessageByPattern(commitMsgPattern, *changeType, trimmedBranch, string(*commitText))
 	} else {
 		// DEFAULT IF NO TYPE
@@ -154,6 +154,8 @@ func main() {
 		// DEFAULT
 		fullCommitText = *changeType + ": [" + string(trimmedBranch) + "] " + string(*commitText)
 	}
+
+	fullCommitText = string(*commitText)
 
 	// RM duplicate spaces
 	space := regexp.MustCompile(`\s+`)
