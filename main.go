@@ -17,7 +17,7 @@ func main() {
 
 	commitText := flag.String("m", "Update", "commit message")
 	changeType := flag.String("t", "Update", "*changeType")
-	alias := flag.String("a", "default", "alias")
+	alias := flag.String("p", "default", "alias")
 	crop := flag.String("c", "0", "crop")
 	flag.Parse()
 
@@ -25,6 +25,7 @@ func main() {
 	fmt.Println("crop : ", *crop)
 	fmt.Println("*commitText : ", *commitText)
 	fmt.Println("*changeType : ", *changeType)
+	fmt.Println("\n")
 
 	setupPath := "./config.json"
 
@@ -37,12 +38,15 @@ func main() {
 
 		// TODO: DO STUFF with config
 		if err == nil {
-			fmt.Println(setupProfiles)
 
-			// profile, err := helpers.FindProfile(setupProfiles.Profiles, *alias)
-			// if err == nil {
-			// 	fmt.Println(profile)
-			// }
+			profile, err := helpers.FindProfile(setupProfiles.Profiles, *alias)
+			if err != nil {
+				fmt.Println(err.Error())
+				return
+			}
+			fmt.Println(profile)
+			return
+
 			// fmt.Println(helpers.FindProfile(setupProfiles.Profiles, *alias))
 
 			// TODO

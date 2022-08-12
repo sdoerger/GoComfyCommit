@@ -1,7 +1,8 @@
-package pwhelper
+package helpers
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -14,24 +15,19 @@ func AssertErrorToNilf(message string, err error) {
 	}
 }
 
-type tCredentials struct {
-	User     string `json:"user"`
-	Password string `json:"password"`
-}
-
 // type tSubTargets struct {
 //     SubTargets []string `json:"subTargets"`
 // }
 
 // User struct which contains a name
 // a type and a list of social links
-type tProfile struct {
+type TProfile struct {
 	CommitMessage string `json:"commitMessage"`
 	TruncBranchAt int    `json:"truncBranchAt"`
 	Alias         string `json:"alias"`
 }
-type tSetup struct {
-	Profiles []tProfile `json:"profiles"`
+type TSetup struct {
+	Profiles []TProfile `json:"profiles"`
 }
 
 func OpenFileRead(path string) ([]byte, error) {
@@ -48,23 +44,36 @@ func OpenFileRead(path string) ([]byte, error) {
 	return byteValue, err
 }
 
-func SetupJson(setupPath string) (tSetup, error) {
+func SetupJson(setupPath string) (TSetup, error) {
 
 	file, err := OpenFileRead(setupPath)
 	if err != nil {
 		log.Fatalf("Error at reading setup file: %v", err)
 	}
 
-	var setup tSetup
+	var setup TSetup
 	json.Unmarshal(file, &setup)
 
 	return setup, err
 
 }
 
-func FindProfile(profiles []string, profile string) /*(string, error)*/ {
-	fmt.Println(profiles)
-	fmt.Println(profile)
+func FindProfile(profiles []TProfile, alias string) (TProfile, error) {
+
+	match, matchedProfile := false, TProfile{}
+
+	for _, profile := range profiles {
+		if profile.Alias == alias {
+			match = true
+			matchedProfile = profile
+
+		}
+	}
+	if match {
+		return matchedProfile, nil
+	}
+	return matchedProfile, errors.New("Profile is not in config file (-p " + alias + ")")
+
 }
 
 func ParseMessagePattern(patternString string) {
