@@ -53,12 +53,6 @@ func main() {
 	// Check if there is a config.json file
 	_, hasNoConfig := helpers.OpenFileRead(setupPath)
 	if hasNoConfig == nil /*&& len(*alias) > 0*/ {
-		fmt.Println(*alias)
-		fmt.Println(len(*alias))
-
-		if len(*alias) <= 0 {
-			return
-		}
 
 		// // Get setup json
 		setupProfiles, err := helpers.SetupJson(setupPath)
