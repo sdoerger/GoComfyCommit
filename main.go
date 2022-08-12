@@ -54,6 +54,7 @@ func main() {
 	_, hasNoConfig := helpers.OpenFileRead(setupPath)
 	if hasNoConfig == nil /*&& len(*alias) > 0*/ {
 		fmt.Println(*alias)
+		fmt.Println(len(*alias))
 
 		// // Get setup json
 		setupProfiles, err := helpers.SetupJson(setupPath)
