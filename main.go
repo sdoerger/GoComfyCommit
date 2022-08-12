@@ -127,12 +127,15 @@ func main() {
 
 	// SET PATTERN TO COMMIT TEXT (IF SETUP)
 	if hasNoConfig == nil && len(commitMsgPattern) > 0 {
+		fmt.Println("RUNS 1")
 		fullCommitText = helpers.CommitMessageByPattern(commitMsgPattern, *changeType, trimmedBranch, string(*commitText))
 	}
 
 	if len(*changeType) >= 0 {
+		fmt.Println("RUNS 2")
 		fullCommitText = "[" + string(trimmedBranch) + "] " + string(*commitText)
 	} else {
+		fmt.Println("RUNS 3")
 		// DEFAULT
 		fullCommitText = string(*commitText)
 
