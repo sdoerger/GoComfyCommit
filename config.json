@@ -9,7 +9,7 @@
     {
       "alias": "exp",
       "commitMessage": "My CommitType: ${t} at Branch: ${b} > My Message: ${m}",
-      "cropBranchFromTo": [0, 4],
+      "cropBranchFromTo": [0, 3],
       "defaultCommitType": "feat"
     }
   ]
