@@ -57,7 +57,8 @@ func main() {
 			}
 
 			// If profiles has crop item and no crop is set (default: 0), assign it from profile
-			if profile.CropBranchFromTo > 0 && cropToStr > 0 {
+			if profile.CropBranchFromTo > 0 && cropToStr != 0 {
+				fmt.Println("RUNS")
 				*crop = strconv.Itoa(profile.CropBranchFromTo)
 			}
 
