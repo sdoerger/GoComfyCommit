@@ -18,7 +18,7 @@ func main() {
 
 	commitText := flag.String("m", "Update", "commit message")
 	changeType := flag.String("t", "", "*changeType")
-	alias := flag.String("p", "", "alias")
+	alias := flag.String("p", "default", "alias")
 	crop := flag.String("c", "[0,0]", "crop")
 	flag.Parse()
 
@@ -64,43 +64,39 @@ func main() {
 			// FIND PROFILE ##########
 			// #######################
 
-			if len(*alias) > 0 {
-				profile, err := helpers.FindProfile(setupProfiles.Profiles, *alias)
-				if err != nil {
-					fmt.Println(err.Error())
-					// return
-				}
-
-				// #######################
-				// ADD CROP RANGE ########
-				// #######################
-
-				// IF profiles has crop item and no crop is set (default: 0), assign it from profile
-				if len(profile.CropBranchFromTo) == 2 && *crop == "[0,0]" {
-					// Convert crop string form flag to slice
-					var convertProfileCrop []int
-					if err := json.Unmarshal([]byte(*crop), &convertProfileCrop); err != nil {
-						panic(err)
-					}
-					cropRange = profile.CropBranchFromTo
-				}
-
-				// ##########################################
-				// SET COMMIT MESSAGE PATTERN ############
-				// ##########################################
-				if len(profile.CommitMessage) > 0 {
-					commitMsgPattern = profile.CommitMessage
-				}
-
-				// ##########################################
-				// SET DEFAULT CHANGE TYPE ##################
-				// ##########################################
-				if len(profile.DefaultCommitType) > 0 && len(*changeType) <= 0 {
-					*changeType = profile.DefaultCommitType
-				}
-
+			profile, err := helpers.FindProfile(setupProfiles.Profiles, *alias)
+			if err != nil {
+				fmt.Println(err.Error())
+				// return
 			}
 
+			// #######################
+			// ADD CROP RANGE ########
+			// #######################
+
+			// IF profiles has crop item and no crop is set (default: 0), assign it from profile
+			if len(profile.CropBranchFromTo) == 2 && *crop == "[0,0]" {
+				// Convert crop string form flag to slice
+				var convertProfileCrop []int
+				if err := json.Unmarshal([]byte(*crop), &convertProfileCrop); err != nil {
+					panic(err)
+				}
+				cropRange = profile.CropBranchFromTo
+			}
+
+			// ##########################################
+			// SET COMMIT MESSAGE PATTERN ############
+			// ##########################################
+			if len(profile.CommitMessage) > 0 {
+				commitMsgPattern = profile.CommitMessage
+			}
+
+			// ##########################################
+			// SET DEFAULT CHANGE TYPE ##################
+			// ##########################################
+			if len(profile.DefaultCommitType) > 0 && len(*changeType) <= 0 {
+				*changeType = profile.DefaultCommitType
+			}
 		}
 	}
 
