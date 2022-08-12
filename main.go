@@ -29,6 +29,10 @@ func main() {
 
 	setupPath := "./config.json"
 
+	// #################################################
+	// IF SETUP FILE ###################################
+	// #################################################
+
 	// Check if there is a config.json file
 	_, noConfig := helpers.OpenFileRead(setupPath)
 	if noConfig == nil {
@@ -45,7 +49,23 @@ func main() {
 				return
 			}
 			fmt.Println(profile)
-			return
+
+			// string to int
+			cropToStr, err := strconv.Atoi(*crop)
+			if err != nil {
+				fmt.Println(err.Error())
+			}
+
+			// If profiles has crop item and no crop is set (default: 0), assign it from profile
+			if profile.CropBranchAt > 0 && cropToStr > 0 {
+				*crop = strconv.Itoa(profile.CropBranchAt)
+			}
+
+			setFullCommitTest := helpers.SetFullCommitTest()
+			fmt.Println(setFullCommitTest)
+
+			/* TODO: RM */
+			// return
 
 			// fmt.Println(helpers.FindProfile(setupProfiles.Profiles, *alias))
 
@@ -57,6 +77,8 @@ func main() {
 
 	}
 
+	fmt.Println("CROP")
+	fmt.Println(*crop)
 	// return
 
 	if len(*commitText) == 0 {

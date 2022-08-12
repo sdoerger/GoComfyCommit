@@ -23,7 +23,7 @@ func AssertErrorToNilf(message string, err error) {
 // a type and a list of social links
 type TProfile struct {
 	CommitMessage string `json:"commitMessage"`
-	TruncBranchAt int    `json:"truncBranchAt"`
+	CropBranchAt  int    `json:"cropBranchAt"`
 	Alias         string `json:"alias"`
 }
 type TSetup struct {
@@ -78,6 +78,11 @@ func FindProfile(profiles []TProfile, alias string) (TProfile, error) {
 
 func ParseMessagePattern(patternString string) {
 	fmt.Println(patternString)
+}
+
+func SetFullCommitTest() string {
+	// fmt.Println("Hello")
+	return "Hello"
 }
 
 // func RemoveDuplicateStr(strSlice []string) []string {
