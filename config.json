@@ -2,12 +2,12 @@
   "profiles": [
     {
       "commitMessage": "${t}: [${b}] ${m}",
-      "cropBranchFromTo": 6,
+      "cropBranchFromTo": [0, 8],
       "alias": "land"
     },
     {
       "commitMessage": "My CommitType: ${t} at Branch: ${b}: My Message: ${m}",
-      "cropBranchFromTo": 8,
+      "cropBranchFromTo": [0, 6],
       "alias": "exp"
     }
   ]

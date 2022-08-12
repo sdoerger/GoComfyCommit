@@ -23,7 +23,7 @@ func AssertErrorToNilf(message string, err error) {
 // a type and a list of social links
 type TProfile struct {
 	CommitMessage    string `json:"commitMessage"`
-	CropBranchFromTo int    `json:"cropBranchFromTo"`
+	CropBranchFromTo []int  `json:"cropBranchFromTo"`
 	Alias            string `json:"alias"`
 }
 type TSetup struct {

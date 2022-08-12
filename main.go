@@ -1,10 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"os/exec"
-	"strconv"
 
 	helpers "GoCommit/helpers"
 )
@@ -18,8 +18,22 @@ func main() {
 	commitText := flag.String("m", "Update", "commit message")
 	changeType := flag.String("t", "Update", "*changeType")
 	alias := flag.String("p", "default", "alias")
-	crop := flag.String("c", "0", "crop")
+	crop := flag.String("c", "[0,0]", "crop")
 	flag.Parse()
+
+	// var cropRange []int
+
+	// cropToString := []byte(*crop)
+	// cropRange := cropToString[1]
+
+	// Convert crop string form flag to slice
+	var cropRange []int
+	if err := json.Unmarshal([]byte(*crop), &cropRange); err != nil {
+		panic(err)
+	}
+
+	fmt.Println("cropRange")
+	fmt.Println(cropRange)
 
 	fmt.Println("Alias : ", *alias)
 	fmt.Println("crop : ", *crop)
@@ -34,8 +48,8 @@ func main() {
 	// #################################################
 
 	// Check if there is a config.json file
-	_, noConfig := helpers.OpenFileRead(setupPath)
-	if noConfig == nil {
+	_, hasNoConfig := helpers.OpenFileRead(setupPath)
+	if hasNoConfig == nil {
 
 		// // Get setup json
 		setupProfiles, err := helpers.SetupJson(setupPath)
@@ -43,6 +57,7 @@ func main() {
 		// TODO: DO STUFF with config
 		if err == nil {
 
+			// Find profile from config array
 			profile, err := helpers.FindProfile(setupProfiles.Profiles, *alias)
 			if err != nil {
 				fmt.Println(err.Error())
@@ -50,36 +65,21 @@ func main() {
 			}
 			fmt.Println(profile)
 
-			// string to int
-			cropToStr, err := strconv.Atoi(*crop)
-			if err != nil {
-				fmt.Println(err.Error())
-			}
-
-			// If profiles has crop item and no crop is set (default: 0), assign it from profile
-			if profile.CropBranchFromTo > 0 && cropToStr <= 0 {
-				fmt.Println("RUNS")
-				*crop = strconv.Itoa(profile.CropBranchFromTo)
+			// IF profiles has crop item and no crop is set (default: 0), assign it from profile
+			if len(profile.CropBranchFromTo) == 2 && *crop == "[0,0]" {
+				// Convert crop string form flag to slice
+				var convertProfileCrop []int
+				if err := json.Unmarshal([]byte(*crop), &convertProfileCrop); err != nil {
+					panic(err)
+				}
+				cropRange = profile.CropBranchFromTo
 			}
 
 			setFullCommitTest := helpers.SetFullCommitTest()
 			fmt.Println(setFullCommitTest)
-
-			/* TODO: RM */
-			// return
-
-			// fmt.Println(helpers.FindProfile(setupProfiles.Profiles, *alias))
-
-			// TODO
-			// Set crop length (if not flag on crop is set)
-			// *crop =
-
 		}
-
 	}
 
-	fmt.Println("CROP")
-	fmt.Println(*crop)
 	/* TODO: RM */
 	return
 
@@ -116,16 +116,9 @@ func main() {
 	// -------------------------------------------
 	// Crop branchname if set by flag or config
 
-	// string to int
-	toCrop, err := strconv.Atoi(*crop)
-	if err != nil {
-		// ... handle error
-		panic(err)
-	}
-
 	trimmedBranch := string(currentBranch[:len(currentBranch)-1])
-	if len(currentBranch) > toCrop {
-		trimmedBranch = string(currentBranch[:toCrop])
+	if len(currentBranch) > cropRange[1] {
+		trimmedBranch = string(currentBranch[cropRange[0]:cropRange[1]])
 	}
 
 	fullCommitText := ""
