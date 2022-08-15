@@ -1,4 +1,4 @@
-# GoCommit
+# GoComfyCommit
 
 # Why
 
@@ -11,7 +11,7 @@ It basically runs
 Use the config.example.json (rename to config.json) to add profiles.
 Add an alias, to run this profile (ie. "-p exp")
 
-```GoCommit -t "docs" -m "Update Readme" -p exp```
+```GoComfyCommit -t "docs" -m "Update Readme" -p exp```
 (on branch main that does:
 ```
 git add . and git commit -m "My CommitType: docs at Branch: mai > My Message: Update Readme"

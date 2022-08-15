@@ -1,4 +1,4 @@
-module GoCommit
+module GoComfyCommit
 
 go 1.18
 

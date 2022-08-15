@@ -8,7 +8,7 @@
     },
     {
       "alias": "exp",
-      "commitMessage": "${t}: [${b}] ${m}",
+      "commitMessage": "${t}/${b}: ${m}",
       "cropBranchFromTo": [0, 6],
       "defaultCommitType": "refactor"
     }

@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"os"
 	"os/exec"
 	"regexp"
 
-	helpers "GoCommit/helpers"
+	helpers "GoComfyCommit/helpers"
 )
 
 func main() {
@@ -29,7 +30,8 @@ func main() {
 	}
 	var commitMsgPattern string
 
-	setupPath := "./config.json"
+	path, err := os.Getwd()
+	setupPath := path + "/config.json"
 
 	// #################################################
 	// IF SETUP FILE ###################################
