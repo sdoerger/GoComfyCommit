@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path"
 	"regexp"
 
 	helpers "GoComfyCommit/helpers"
@@ -30,8 +31,13 @@ func main() {
 	}
 	var commitMsgPattern string
 
-	path, err := os.Getwd()
-	setupPath := path + "/config.json"
+	execPath, err := os.Executable()
+	if err != nil {
+		fmt.Println("No config file. No worries, it works without, too.")
+	}
+	fmt.Println(path.Dir(execPath))
+
+	setupPath := path.Dir(execPath) + "/config.json"
 
 	// #################################################
 	// IF SETUP FILE ###################################
