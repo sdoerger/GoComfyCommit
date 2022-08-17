@@ -32,11 +32,12 @@ func main() {
 	if err := json.Unmarshal([]byte(*crop), &cropRange); err != nil {
 		panic(err)
 	}
+
 	var commitMsgPattern string
 
 	execPath, err := os.Executable()
 	if err != nil {
-		fmt.Println("No config file. No worries, it works without, too.")
+		fmt.Println("No config file. No worries, it works without, too. Checkout the readme for flags.")
 	}
 	fmt.Println(path.Dir(execPath))
 

@@ -40,5 +40,7 @@ cropBranchFromTo: Here you can truncate the branch name. If you do not have "mai
 ## In the Fute
 
 - [ ] Add message description (to set links)
+- [ ] Set different config path as default
+- [ ] Add--help command
 - [x] Customizable by config file
 - [x] Able to read message patterns by config file
