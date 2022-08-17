@@ -69,16 +69,8 @@ func main() {
 			// #######################
 			// ADD CROP RANGE ########
 			// #######################
-
-			fmt.Println("BEFORE CROP CASE")
-			fmt.Println("profile.CropBranchFromTo")
-			fmt.Println(profile.CropBranchFromTo)
-
-			fmt.Println("*crop")
-			fmt.Println(*crop)
 			// IF profiles has crop item and no crop is set (default: 0), assign it from profile
 			if len(profile.CropBranchFromTo) == 2 && *crop == defaultCrop {
-				fmt.Println("IS CROP CASE")
 				// Convert crop string form flag to slice
 				var convertProfileCrop []int
 				if err := json.Unmarshal([]byte(*crop), &convertProfileCrop); err != nil {
