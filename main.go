@@ -18,10 +18,13 @@ func main() {
 	// FLAGS ######################
 	// ############################
 
+	// To avoid bugs in if statement
+	defaultCrop := "[0,99]"
+
 	commitText := flag.String("m", "Update", "commit message")
 	changeType := flag.String("t", "", "*changeType")
 	alias := flag.String("p", "", "alias")
-	crop := flag.String("c", "[0,99]", "crop")
+	crop := flag.String("c", defaultCrop, "crop")
 	flag.Parse()
 
 	// Convert crop string form flag to slice
@@ -67,8 +70,15 @@ func main() {
 			// ADD CROP RANGE ########
 			// #######################
 
+			fmt.Println("BEFORE CROP CASE")
+			fmt.Println("profile.CropBranchFromTo")
+			fmt.Println(profile.CropBranchFromTo)
+
+			fmt.Println("*crop")
+			fmt.Println(*crop)
 			// IF profiles has crop item and no crop is set (default: 0), assign it from profile
-			if len(profile.CropBranchFromTo) == 2 && *crop == "[0,0]" {
+			if len(profile.CropBranchFromTo) == 2 && *crop == defaultCrop {
+				fmt.Println("IS CROP CASE")
 				// Convert crop string form flag to slice
 				var convertProfileCrop []int
 				if err := json.Unmarshal([]byte(*crop), &convertProfileCrop); err != nil {

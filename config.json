@@ -3,7 +3,7 @@
     {
       "alias": "land",
       "commitMessage": "${t}: [${b}] ${m}",
-      "cropBranchFromTo": [0, 8],
+      "cropBranchFromTo": [0, 2],
       "defaultCommitType": "docs"
     },
     {
