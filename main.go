@@ -27,6 +27,8 @@ func main() {
 	crop := flag.String("c", defaultCrop, "crop")
 	flag.Parse()
 
+	var descriptionMessage string
+
 	// Convert crop string form flag to slice
 	var cropRange []int
 	if err := json.Unmarshal([]byte(*crop), &cropRange); err != nil {
@@ -93,6 +95,12 @@ func main() {
 			if len(profile.DefaultCommitType) > 0 && len(*changeType) <= 0 {
 				*changeType = profile.DefaultCommitType
 			}
+			// ##########################################
+			// SET Description ##########################
+			// ##########################################
+			if len(profile.DescriptionMessage) > 0 {
+				descriptionMessage = profile.DescriptionMessage
+			}
 		}
 	}
 
@@ -113,7 +121,7 @@ func main() {
 	}
 
 	// -------------------------------------------
-	// ------------  ADD ALL FILES  --------------
+	// ------------  ADD ALL FILES TO COMMIT -----
 	// -------------------------------------------
 
 	runGitAddAll := exec.Command("git", "add", ".")
@@ -134,11 +142,17 @@ func main() {
 		trimmedBranch = string(currentBranch[cropRange[0]:cropRange[1]])
 	}
 
-	fullCommitText := ""
+	var fullCommitText string
+	var fullCommitDescripton string
 
 	// SET PATTERN TO COMMIT TEXT (IF SETUP)
 	if hasNoConfig == nil && len(commitMsgPattern) > 0 {
 		fullCommitText = helpers.CommitMessageByPattern(commitMsgPattern, *changeType, trimmedBranch, string(*commitText))
+
+		if len(descriptionMessage) > 0 {
+			fullCommitDescripton = helpers.CommitMessageByPattern(descriptionMessage, *changeType, trimmedBranch, string(*commitText))
+		}
+
 	} else {
 		// DEFAULT IF NO TYPE
 		if len(*changeType) <= 0 {
@@ -153,8 +167,15 @@ func main() {
 	space := regexp.MustCompile(`\s+`)
 	fullCommitText = space.ReplaceAllString(fullCommitText, " ")
 
-	runGitCommit := exec.Command("git", "commit", "-m"+fullCommitText)
-	_, err = runGitCommit.Output()
+	if len(fullCommitDescripton) > 0 {
+		runGitCommit := exec.Command("git", "commit", "-m"+fullCommitText, "-m"+fullCommitDescripton)
+		_, err = runGitCommit.Output()
+
+	} else {
+		runGitCommit := exec.Command("git", "commit", "-m"+fullCommitText)
+		_, err = runGitCommit.Output()
+
+	}
 
 	if err != nil {
 		fmt.Println(err.Error())

@@ -1,6 +1,12 @@
 {
   "profiles": [
     {
+      "alias": "sddev",
+      "commitMessage": "${t}: [${b}] ${m}",
+      "cropBranchFromTo": [0, 8],
+      "defaultCommitType": "feat"
+    },
+    {
       "alias": "land",
       "commitMessage": "${t}: [${b}] ${m}",
       "cropBranchFromTo": [0, 8],
@@ -8,7 +14,8 @@
     },
     {
       "alias": "exp",
-      "commitMessage": "${t}/${b}: ${m}",
+      "commitMessage": "[${t}]: ${m}",
+      "descriptionMessage": "https://traderepublic.atlassian.net/browse/${b}",
       "cropBranchFromTo": [0, 6],
       "defaultCommitType": "refactor"
     }

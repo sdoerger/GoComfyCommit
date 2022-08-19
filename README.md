@@ -18,7 +18,8 @@ git add . and git commit -m "My CommitType: docs at Branch: mai > My Message: Up
 ```
 )
 
-In "commitMessage" you can write the pattern for you messages and place the placeholders (${t}, ${b}, ${m}), where you want.
+In "commitMessage" (and optional "descriptionMessage") you can write the pattern for you messages and place the placeholders (${t}, ${b}, ${m}), where you want.
+"descriptionMessage" will just -m "Another messge, to add a description.  Like a link to the ticket by branchname, which might contain the ticket number"
 
 ```
 ${b} = that is the branch name, from where you run it
